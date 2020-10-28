@@ -82,15 +82,21 @@ app.post('/getBalance', function(req, res){
 app.post('/get_transaction', function(req, res){
     var countnum = Math.floor(Math.random() * 1000000000) + 1;
     var transId = useCompanyId + countnum; //이용기관번호 본인것 입력
-
     var option = {
         method: "GET",
-        url: "",
+        url: "https://testapi.openbanking.or.kr/v2.0/account/transaction_list/fin_num",
         headers: {
           Authorization: "Bearer " + accessToken,
         },
         qs: {
-            //작성해 주세요
+            bank_tran_id : transId,
+            fintech_use_num : finuseno,
+            inquiry_type:'A',
+            inquiry_base:'D',
+            from_date:'20190101',
+            to_date:'20190101',
+            sort_order:'D',
+            tran_dtime:'20201021213030'
         },
     };
     request(option, function (err, response, body) {
@@ -99,7 +105,6 @@ app.post('/get_transaction', function(req, res){
         //json 문서를 파싱하여 javascript 오브젝트로 변환
         res.json(resResult);
     });
-
 })
 
 app.post('/withdraw', function(req, res){
