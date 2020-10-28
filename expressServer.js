@@ -108,7 +108,7 @@ app.post('/get_transaction', function(req, res){
 })
 
 app.post('/withdraw', function(req, res){
-    var qrcodefinnon = req.body.qrcodeData;  
+    var qrcodefinnon = "199159919057870972485182";  
     var countnum = Math.floor(Math.random() * 1000000000) + 1;
     var transId = useCompanyId + countnum; //이용기관번호 본인것 입력
     var option = {
@@ -118,11 +118,11 @@ app.post('/withdraw', function(req, res){
           Authorization: "Bearer " + accessToken,
         },
         json: {
-            "bank_tran_id": "T991599190U001016614",
+            "bank_tran_id": transId,
             "cntr_account_type": "N",
             "cntr_account_num": "7832932596",
             "dps_print_content": "쇼핑몰환불",
-            "fintech_use_num": "199159919057870972485182",
+            "fintech_use_num": finuseno,
             "wd_print_content": "오픈뱅킹출금",
             "tran_amt": "1000",
             "tran_dtime": "20201026192900",
@@ -137,7 +137,7 @@ app.post('/withdraw', function(req, res){
         },
     };
     request(option, function (err, response, body) {
-        var resResult = JSON.parse(body);
+        var resResult = body;
         console.log(resResult);
         if(resResult.res_code == "A0000"){
             res.json(1);
