@@ -14,7 +14,7 @@
     <script>
             // 우리가 지정한 confirmButton 으로 이벤트를 연결(바인딩) 했습니다.
             $.ajax({
-                url: "/", //데이터를 요청할 URL 입니다.
+                url: "/getBalance", //데이터를 요청할 URL 입니다.
                 type: "POST", //데이터를 요청하는 HTTP Method (POST, GET)
                 headers: {
                 }, //header 부분을 작성하는 곳 입니다.
@@ -22,11 +22,7 @@
                 },
                 success: function (data) {
                     console.log(data);
-                    for(var i = 0; i < data.res_list.length; i++){
-                        $("#myaccount").append(
-                            '<tr><td>'+data.res_list[i].account_alias+'</td><td>'+data.res_list[i].fintech_use_num+'</td><td><a href="/balance?fin_use_num=' + data.res_list[i].fintech_use_num +'">잔액조회</a></td><td></td></tr>'
-                        )
-                    }
+                    $("#balance").append(data.balance_amt)
                 },
             });        
     </script>

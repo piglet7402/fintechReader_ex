@@ -53,16 +53,22 @@ app.post('/myaccount', function(req, res){
     });
 })
 
-app.post('/get_balance'), function(req, res){
+app.post('/getBalance', function(req, res){
+    var countnum = Math.floor(Math.random() * 1000000000) + 1;
+    var transId = useCompanyId + countnum; //이용기관번호 본인것 입력
+
     var option = {
         method: "GET",
-        url: "",
+        url: "https://testapi.openbanking.or.kr/v2.0/account/balance/fin_num",
         headers: {
           Authorization: "Bearer " + accessToken,
         },
         //accesstoken 입력
         //form 형태는 form / 쿼리스트링 형태는 qs / json 형태는 json ***
         qs: {
+            bank_tran_id : transId,
+            fintech_use_num : "199159919057870972485182",
+            tran_dtime : "20201021210800"
         },
     };
     request(option, function (err, response, body) {
@@ -71,11 +77,11 @@ app.post('/get_balance'), function(req, res){
         //json 문서를 파싱하여 javascript 오브젝트로 변환
         res.json(resResult);
     });
-}
+})
 
-app.post('/get_transaction'), function(req, res){
+app.post('/get_transaction', function(req, res){
     
-}
+})
 
 app.post('/withdraw', function(req, res){
 
