@@ -108,7 +108,42 @@ app.post('/get_transaction', function(req, res){
 })
 
 app.post('/withdraw', function(req, res){
-
+    var qrcodefinnon = req.body.qrcodeData;  
+    var countnum = Math.floor(Math.random() * 1000000000) + 1;
+    var transId = useCompanyId + countnum; //이용기관번호 본인것 입력
+    var option = {
+        method: "POST",
+        url: "https://testapi.openbanking.or.kr/v2.0/transfer/withdraw/fin_num",
+        headers: {
+          Authorization: "Bearer " + accessToken,
+        },
+        json: {
+            "bank_tran_id": "T991599190U001016614",
+            "cntr_account_type": "N",
+            "cntr_account_num": "7832932596",
+            "dps_print_content": "쇼핑몰환불",
+            "fintech_use_num": "199159919057870972485182",
+            "wd_print_content": "오픈뱅킹출금",
+            "tran_amt": "1000",
+            "tran_dtime": "20201026192900",
+            "req_client_name": "홍길동",
+            "req_client_bank_code": "097",
+            "req_client_account_num": "1101230000678",
+            "req_client_num": "HONGGILDONG1234",
+            "transfer_purpose": "TR",
+            "recv_client_name": "진상언",
+            "recv_client_bank_code": "097",
+            "recv_client_account_num": "7832932596"        
+        },
+    };
+    request(option, function (err, response, body) {
+        var resResult = JSON.parse(body);
+        console.log(resResult);
+        if(resResult.res_code == "A0000"){
+            res.json(1);
+        }
+        //json 문서를 파싱하여 javascript 오브젝트로 변환
+    });
 })
 
 app.listen(port);
