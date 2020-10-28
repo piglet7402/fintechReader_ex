@@ -14,7 +14,7 @@ var userseqno ="1100034736" // 사용자 번호를 넣어주세요
 var finuseno = "199159919057870972485182" // 대표 계좌 번호를 입력해주세요
 var useCompanyId = "T991599190U"//이용기관 번호를 세팅해주세요
 
-app.get("/main", function (req, res) {
+app.get("/main", function (req, res) {
     res.render('main');
 });
 
@@ -25,6 +25,11 @@ app.get('/trasaction', function(req, res){
 app.get('/pay', function(req, res){
     res.render('pay');
 })
+
+app.get('/balance', function(req, res){
+    res.render('balance');
+})
+
 
 app.post('/myaccount', function(req, res){
     var option = {
@@ -60,5 +65,5 @@ app.post('/withdraw', function(req, res){
 
 })
 
-app.listen(port);
+app.listen(port);
 console.log("Listening on port ", port);
