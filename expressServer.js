@@ -18,12 +18,12 @@ app.get("/main", function (req, res) {
     res.render('main');
 });
 
-app.get('/trasaction', function(req, res){
+app.get('/transaction', function(req, res){
     res.render('transaction');
 })
 
 app.get('/pay', function(req, res){
-    res.render('pay');
+    res.render('qrcode');
 })
 
 app.get('/balance', function(req, res){
