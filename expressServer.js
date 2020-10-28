@@ -54,7 +54,23 @@ app.post('/myaccount', function(req, res){
 })
 
 app.post('/get_balance'), function(req, res){
-
+    var option = {
+        method: "GET",
+        url: "",
+        headers: {
+          Authorization: "Bearer " + accessToken,
+        },
+        //accesstoken 입력
+        //form 형태는 form / 쿼리스트링 형태는 qs / json 형태는 json ***
+        qs: {
+        },
+    };
+    request(option, function (err, response, body) {
+        var resResult = JSON.parse(body);
+        console.log(resResult);
+        //json 문서를 파싱하여 javascript 오브젝트로 변환
+        res.json(resResult);
+    });
 }
 
 app.post('/get_transaction'), function(req, res){
