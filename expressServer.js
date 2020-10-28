@@ -80,7 +80,26 @@ app.post('/getBalance', function(req, res){
 })
 
 app.post('/get_transaction', function(req, res){
-    
+    var countnum = Math.floor(Math.random() * 1000000000) + 1;
+    var transId = useCompanyId + countnum; //이용기관번호 본인것 입력
+
+    var option = {
+        method: "GET",
+        url: "",
+        headers: {
+          Authorization: "Bearer " + accessToken,
+        },
+        qs: {
+            //작성해 주세요
+        },
+    };
+    request(option, function (err, response, body) {
+        var resResult = JSON.parse(body);
+        console.log(resResult);
+        //json 문서를 파싱하여 javascript 오브젝트로 변환
+        res.json(resResult);
+    });
+
 })
 
 app.post('/withdraw', function(req, res){
